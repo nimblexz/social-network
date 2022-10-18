@@ -1,26 +1,20 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {ProfileStateType} from "../../../redux/state";
 
 
+export function MyPosts(props: ProfileStateType) {
 
 
+    let postsElements = props.profilePage.posts.map(p => <Post message={p.message} likes={p.likes} id={p.id}/>)
 
-export function MyPosts(props:ProfileStateType) {
-
-
-
-
-
-
-    let postsElements=props.state.posts.map(p=><Post message={p.message} likes={p.likes} id={p.id}/>)
-    let newPostElement= React.createRef<HTMLTextAreaElement>()
-    let AddPost=()=>{
-        if(newPostElement.current) {
-            props.addPost(newPostElement.current.value);
-        }
-
+    let AddPost = () => {
+        props.addPost(props.message)
+        props.changeNewTextCallback('')
+    }
+    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.changeNewTextCallback(e.currentTarget.value)
     }
     return (
         <>
@@ -30,7 +24,7 @@ export function MyPosts(props:ProfileStateType) {
                 <div>
 
                     <div>
-                        <textarea ref={newPostElement}></textarea>
+                        <textarea value={props.message} onChange={newTextChangeHandler}/>
                     </div>
 
                     <div>

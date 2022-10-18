@@ -85,6 +85,7 @@ export let addPost = (postMessage: string) => {
         likes: 72
     }
     state.profilePage.posts.push(newPost)
+    changeNewText('')
     rerenderEntireTree(state)
 }
 export const changeNewText = (newText: string) => {

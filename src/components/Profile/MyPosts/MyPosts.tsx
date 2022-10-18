@@ -11,7 +11,6 @@ export function MyPosts(props: ProfileStateType) {
 
     let AddPost = () => {
         props.addPost(props.message)
-        props.changeNewTextCallback('')
     }
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.changeNewTextCallback(e.currentTarget.value)

@@ -1,4 +1,4 @@
-let rerenderEntireTree = (state: StateType) => {
+let rerenderEntireTree = (state:StateType) => {
     console.log('State changed')
 }
 
@@ -85,12 +85,15 @@ export let addPost = (postMessage: string) => {
         likes: 72
     }
     state.profilePage.posts.push(newPost)
-    changeNewText('')
+
     rerenderEntireTree(state)
+    changeNewText('')
 }
 export const changeNewText = (newText: string) => {
     state.profilePage.message = newText
+
     rerenderEntireTree(state)
+
 }
 export const subscribe = (observer: (state: StateType) => void) => {
     rerenderEntireTree = observer

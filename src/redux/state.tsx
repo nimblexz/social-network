@@ -4,16 +4,11 @@ export type StoreType={
     onChange:(state: StateType)=>void
     subscribe:(callback:()=>void)=>void
     getState:()=>StateType
-    dispatch:(action:AddPostActionType | ChangePostTextActionType)=>void
+    dispatch:(action:AddPostActionType | ChangeTextActionType)=>void
 }
-export type AddPostActionType={
-    type:'ADD-POST'
-    postMessage:string
-}
-export type ChangePostTextActionType={
-    type:'UPDATE-NEW-POST-TEXT'
-    newText:string
-}
+export type AddPostActionType=ReturnType<typeof addPostAC>
+export type ChangeTextActionType=ReturnType<typeof changeNewTextAC>
+
 export const store:StoreType={
     _state:  {
         profilePage: {
@@ -71,7 +66,18 @@ export const store:StoreType={
     }
 }
 
-
+export const addPostAC=(postMessage:string)=>{
+    return{
+        type:'ADD-POST',
+        postMessage:postMessage
+    }as const
+}
+export const changeNewTextAC=(newText:string)=>{
+    return{
+        type:'UPDATE-NEW-POST-TEXT',
+        newText:newText
+    }as const
+}
 
 export type PostType = {
     id: number

@@ -1,10 +1,18 @@
 export type StoreType={
     _state:StateType
     changeNewText:(newText: string)=>void
-    addPost:(postMessage: string)=>void
     onChange:(state: StateType)=>void
-    subscribe:(callback:any)=>void
+    subscribe:(callback:()=>void)=>void
     getState:()=>StateType
+    dispatch:(action:AddPostActionType | ChangePostTextActionType)=>void
+}
+export type AddPostActionType={
+    type:'ADD-POST'
+    postMessage:string
+}
+export type ChangePostTextActionType={
+    type:'UPDATE-NEW-POST-TEXT'
+    newText:string
 }
 export const store:StoreType={
     _state:  {
@@ -36,18 +44,6 @@ export const store:StoreType={
         this._state.profilePage.message = newText
         this.onChange(store._state)
     },
-    addPost(postMessage: string){
-        debugger
-        let newPost: PostType = {
-            id: 3,
-            message: postMessage,
-            likes: 72
-        }
-        this._state.profilePage.posts.push(newPost)
-        this.changeNewText('')
-        this.onChange(this._state)
-
-    },
     onChange(){
         console.log('State changed')
     },
@@ -56,6 +52,22 @@ export const store:StoreType={
     },
     getState(){
         return this._state
+    },
+    dispatch(action){
+        debugger
+        if(action.type==='ADD-POST'){
+            let newPost: PostType = {
+                id: 3,
+                message: action.postMessage,
+                likes: 72
+            }
+            this._state.profilePage.posts.push(newPost)
+            this.changeNewText('')
+            this.onChange(this._state)
+        }else if (action.type==='UPDATE-NEW-POST-TEXT'){
+            this._state.profilePage.message = action.newText
+            this.onChange(this._state)
+        }
     }
 }
 
@@ -76,12 +88,6 @@ export type DialogType = {
 }
 
 
-export type ProfileStateType = {
-    profilePage: ProfilePageType
-    addPost: (postMessage: string) => void
-    message: string
-    changeNewTextCallback: (newText: string) => void
-}
 
 export type ProfilePageType = {
     posts: Array<PostType>

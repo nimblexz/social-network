@@ -8,17 +8,13 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {
-    AddNewMessageBodyType,
-    AddPostActionType,
-    AddSendMessageType,
-    ChangeTextActionType,
-    StoreType
-} from "./redux/state";
+import {StoreType} from "./redux/store";
+import {AddPostActionType, ChangeTextActionType} from "./redux/profile-reducer";
+import {AddNewMessageBodyType, AddSendMessageType} from "./redux/dialogs-reducer";
 
 type AppPropsType = {
     store: StoreType
-    dispatch:(action: AddPostActionType | ChangeTextActionType | AddNewMessageBodyType | AddSendMessageType)=>void
+    dispatch: (action: AddPostActionType | ChangeTextActionType | AddNewMessageBodyType | AddSendMessageType) => void
 }
 
 function App(props: AppPropsType) {
@@ -31,10 +27,13 @@ function App(props: AppPropsType) {
                 <Navbar/>
                 <div className="app-wrapper-content">
 
-                    <Route path="/dialogs" render={() => <Dialogs dialogsPage={props.store._state.dialogsPage} messageBody={props.store._state.dialogsPage.newMessageBody} dispatch={props.dispatch.bind(props.store)}/>}/>
+                    <Route path="/dialogs" render={() => <Dialogs dialogsPage={props.store._state.dialogsPage}
+                                                                  messageBody={props.store._state.dialogsPage.newMessageBody}
+                                                                  dispatch={props.dispatch.bind(props.store)}/>}/>
                     <Route path="/profile"
-                           render={() => <Profile profilePage={props.store._state.profilePage} dispatch={props.dispatch.bind(props.store)}
-                                                   />}/>
+                           render={() => <Profile profilePage={props.store._state.profilePage}
+                                                  dispatch={props.dispatch.bind(props.store)}
+                           />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>

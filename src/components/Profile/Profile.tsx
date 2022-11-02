@@ -1,10 +1,11 @@
 import React from "react";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {AddPostActionType, ChangeTextActionType, ProfilePageType,} from "../../redux/state";
+import {ProfilePageType} from "../../redux/state";
+import {AddPostActionType, ChangeTextActionType} from "../../redux/profile-reducer";
 
 
-type ProfileStateType = {
+export type ProfileStateType = {
     profilePage: ProfilePageType
     dispatch:(action:AddPostActionType | ChangeTextActionType)=>void
 }

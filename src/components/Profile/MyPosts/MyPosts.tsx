@@ -1,18 +1,13 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {
-    addPostAC,
-    AddPostActionType,
-    changeNewTextAC, ChangeTextActionType,
-
-    ProfilePageType
-} from "../../../redux/state";
+import {ProfilePageType} from "../../../redux/state";
+import {addPostAC, AddPostActionType, changeNewTextAC, ChangeTextActionType} from "../../../redux/profile-reducer";
 
 type ProfileStateType = {
     profilePage: ProfilePageType
     message: string
-    dispatch: (action:AddPostActionType | ChangeTextActionType) => any
+    dispatch: (action: AddPostActionType | ChangeTextActionType) => any
 }
 
 export function MyPosts(props: ProfileStateType) {

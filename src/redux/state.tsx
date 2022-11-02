@@ -1,3 +1,6 @@
+import {AddPostActionType, ChangeTextActionType, profileReducer} from "./profile-reducer";
+import {AddNewMessageBodyType, AddSendMessageType, dialogsReducer} from "./dialogs-reducer";
+
 export type StoreType = {
     _state: StateType
     changeNewText: (newText: string) => void
@@ -6,10 +9,7 @@ export type StoreType = {
     getState: () => StateType
     dispatch: (action: AddPostActionType | ChangeTextActionType | AddNewMessageBodyType | AddSendMessageType) => void
 }
-export type AddPostActionType = ReturnType<typeof addPostAC>
-export type ChangeTextActionType = ReturnType<typeof changeNewTextAC>
-export type AddNewMessageBodyType = ReturnType<typeof updateNewMessageBodyAC>
-export type AddSendMessageType = ReturnType<typeof sendMessageAC>
+
 
 export const store: StoreType = {
     _state: {
@@ -36,8 +36,8 @@ export const store: StoreType = {
                 {id: 3, message: 'Shalom'}
             ],
             newMessageBody: ''
-        },
-        sidebar:{}
+        }
+
     },
     changeNewText(newText: string) {
         this._state.profilePage.message = newText
@@ -53,54 +53,12 @@ export const store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        debugger
-        if (action.type === 'ADD-POST') {
-            let newPost: PostType = {
-                id: 3,
-                message: action.postMessage,
-                likes: 72
-            }
-            this._state.profilePage.posts.push(newPost)
-            this.changeNewText('')
-            this.onChange(this._state)
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.message = action.newText
-            this.onChange(this._state)
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
-            this._state.dialogsPage.newMessageBody = action.body
-            this.onChange(this._state)
-        } else if (action.type === 'SEND-MESSAGE') {
-            let body = this._state.dialogsPage.newMessageBody
-            this._state.dialogsPage.newMessageBody = ''
-            this._state.dialogsPage.messages.push({id: 7, message: body})
-            this.onChange(this._state)
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage,  action )
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this.onChange(this._state)
     }
 }
 
-export const addPostAC = (postMessage: string) => {
-    return {
-        type: 'ADD-POST',
-        postMessage: postMessage
-    } as const
-}
-export const changeNewTextAC = (newText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: newText
-    } as const
-}
-export const updateNewMessageBodyAC = (body: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-BODY',
-        body: body
-    } as const
-}
-export const sendMessageAC = () => {
-    return {
-        type: 'SEND-MESSAGE',
-    } as const
-}
 
 export type PostType = {
     id: number
@@ -136,12 +94,7 @@ export type DialogsPageType = {
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
-    sidebar:any
-
-
 }
-
-
 
 
 

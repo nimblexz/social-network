@@ -15,7 +15,7 @@ export function MyPostsContainer(props: MyPostsContainerType) {
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.dispatch(changeNewTextAC(e.currentTarget.value))
     }
-    return <MyPosts adding={AddPost} newText={newTextChangeHandler} profilePage={props.profilePage}/>
+    return <MyPosts adding={AddPost} newText={newTextChangeHandler} message={props.profilePage.message} posts={props.profilePage.posts}/>
 
 
 }

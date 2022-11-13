@@ -1,8 +1,8 @@
 import React from "react";
-import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {ProfilePageType} from "../../redux/store";
 import {ActionType} from "../../redux/profile-reducer";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 
 export type ProfileStateType = {
@@ -16,7 +16,7 @@ export function Profile(props: ProfileStateType) {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts profilePage={props.profilePage} message={props.profilePage.message}
+            <MyPostsContainer profilePage={props.profilePage}
                      dispatch={props.dispatch}/>
         </div>
     )

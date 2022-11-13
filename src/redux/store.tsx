@@ -1,5 +1,5 @@
-import {ActionType, AddPostActionType, ChangeTextActionType, profileReducer} from "./profile-reducer";
-import {AddNewMessageBodyType, AddSendMessageType, dialogsReducer} from "./dialogs-reducer";
+import {ActionType, profileReducer} from "./profile-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
 
 export type StoreType = {
     _state: StateType
@@ -7,7 +7,7 @@ export type StoreType = {
     onChange: (state: StateType) => void
     subscribe: (callback: () => void) => void
     getState: () => StateType
-    dispatch: (action:ActionType) => void
+    dispatch: (action: ActionType) => void
 }
 
 
@@ -53,7 +53,7 @@ export const store: StoreType = {
         return this._state
     },
     dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage,  action )
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this.onChange(this._state)
     }

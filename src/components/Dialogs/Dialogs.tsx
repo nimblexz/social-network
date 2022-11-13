@@ -1,23 +1,16 @@
 import s from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
-import {
-    DialogsPageType
-
-} from "../../redux/store";
+import {DialogsPageType} from "../../redux/store";
 import {ChangeEvent} from "react";
-import {
-    AddNewMessageBodyType,
-    AddSendMessageType,
-    sendMessageAC,
-    updateNewMessageBodyAC
-} from "../../redux/dialogs-reducer";
+import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
+import {ActionType} from "../../redux/profile-reducer";
 
 
 type DialogsStateType = {
     dialogsPage: DialogsPageType
     messageBody: string
-    dispatch: (action: AddNewMessageBodyType | AddSendMessageType) => void
+    dispatch: (action: ActionType) => void
 }
 
 export function Dialogs(props: DialogsStateType) {

@@ -9,12 +9,11 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {StoreType} from "./redux/store";
-import {AddPostActionType, ChangeTextActionType} from "./redux/profile-reducer";
-import {AddNewMessageBodyType, AddSendMessageType} from "./redux/dialogs-reducer";
+import {ActionType} from "./redux/profile-reducer";
 
 type AppPropsType = {
     store: StoreType
-    dispatch: (action: AddPostActionType | ChangeTextActionType | AddNewMessageBodyType | AddSendMessageType) => void
+    dispatch: (action: ActionType) => void
 }
 
 function App(props: AppPropsType) {

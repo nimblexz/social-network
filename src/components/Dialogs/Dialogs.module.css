@@ -1,6 +1,7 @@
 .dialogs {
     display: grid;
     grid-template-columns: 2fr 10fr;
+    color: #99da13;
 }
 
 .dialogsItems.active {

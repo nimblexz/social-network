@@ -33,11 +33,16 @@ const initialState: DialogsPageType = {
 }
 export const dialogsReducer = (state:DialogsPageType=initialState, action:ActionType): DialogsPageType => {
     if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
-        state.newMessageBody = action.newMessageBody
+        let statecopy={...state}
+        statecopy.newMessageBody = action.newMessageBody
+        return statecopy
     } else if (action.type === 'SEND-MESSAGE') {
-        let body = state.newMessageBody
-        state.newMessageBody = ''
-        state.messages.push({id: 7, message: body})
+        let statecopy={...state}
+        statecopy.messages=[...state.messages]
+        let body = statecopy.newMessageBody
+        statecopy.newMessageBody = ''
+        statecopy.messages.push({id: 7, message: body})
+        return statecopy
     }
 
 

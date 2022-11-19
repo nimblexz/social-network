@@ -41,10 +41,15 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             message: action.message,
             likes: 72
         }
-        state.posts.push(newPost)
-        state.message = ''
+        let statecopy={...state}
+        statecopy.posts=[...state.posts]
+        statecopy.posts.push(newPost)
+        statecopy.message = ''
+        return statecopy
     } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-        state.message = action.message
+        let statecopy={...state}
+        statecopy.message = action.message
+        return statecopy
     }
 
     return state

@@ -11,7 +11,7 @@ export type StoreType = {
 }
 
 
-export const store: StoreType = {
+ const store: StoreType = {
     _state: {
         profilePage: {
             message: '',

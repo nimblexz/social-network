@@ -1,5 +1,6 @@
 import {PostType} from "./store";
 import {AddNewMessageBodyType, AddSendMessageType} from "./dialogs-reducer";
+import {AppStateType} from "./redux-store";
 
 export type AddPostActionType = ReturnType<typeof addPostAC>
 export type ChangeTextActionType = ReturnType<typeof changeNewTextAC>
@@ -24,7 +25,15 @@ export const changeNewTextAC = (newText: string) => {
     } as const
 }
 
-export const profileReducer = (state:ProfilePageType,action:ActionType): ProfilePageType => {
+const initialState: ProfilePageType = {
+    message: '',
+    posts: [
+        {id: 1, message: 'poka', likes: 2},
+        {id: 2, message: 'privet', likes: 6}
+    ]
+}
+
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionType): ProfilePageType => {
 
     if (action.type === 'ADD-POST') {
         let newPost: PostType = {

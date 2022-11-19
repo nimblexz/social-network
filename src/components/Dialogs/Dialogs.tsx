@@ -8,7 +8,7 @@ import {ChangeEvent} from "react";
 type DialogsStateType = {
     dialogs: DialogType[]
     messages: MessageType[]
-    messageBody: string
+    newMessageBody: string
     updateNewMessagebody: (body: string) => void
     sendMessage: () => void
 }
@@ -19,7 +19,7 @@ export function Dialogs(props: DialogsStateType) {
     let dialogsElements = props.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
 
     let messagesElements = props.messages.map(m => <Message message={m.message} id={m.id}/>)
-    let newMessageBody = props.messageBody
+    let newMessageBody = props.newMessageBody
     let onSendMessageClick = () => {
         props.sendMessage()
     }

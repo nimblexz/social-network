@@ -10,14 +10,13 @@ export type ProfileStateType = {
     dispatch: (action: ActionType) => void
 }
 
-export function Profile(props: ProfileStateType) {
+export function Profile() {
 
 
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer profilePage={props.profilePage}
-                     dispatch={props.dispatch}/>
+            <MyPostsContainer/>
         </div>
     )
 }

@@ -1,7 +1,13 @@
-import {DialogsPageType} from "../../redux/store";
+import {DialogsPageType, ProfilePageType} from "../../redux/store";
 import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
-import {ActionType} from "../../redux/profile-reducer";
+import {ActionType, addPostAC, changeNewTextAC} from "../../redux/profile-reducer";
 import {Dialogs} from "./Dialogs";
+import {AppStateType, store} from "../../redux/redux-store";
+import {Dispatch} from "redux";
+import {ChangeEvent} from "react";
+import {connect} from "react-redux";
+import {MyPosts} from "../Profile/MyPosts/MyPosts";
+
 
 
 type DialogsContainerType = {
@@ -10,19 +16,28 @@ type DialogsContainerType = {
     dispatch: (action: ActionType) => void
 }
 
-export function DialogsContainer(props: DialogsContainerType) {
 
 
 
-    let onSendMessageClick = () => {
-        props.dispatch(sendMessageAC())
+let mapStateToProps=(state:AppStateType):DialogsPageType=>{
+
+    return{
+        dialogs:state.dialogsPage.dialogs,
+        messages:state.dialogsPage.messages,
+        newMessageBody:state.dialogsPage.newMessageBody,
+
+
     }
-    let onNewMessageChange = (body: string) => {
-        props.dispatch(updateNewMessageBodyAC(body))
-    }
-    return <Dialogs updateNewMessagebody={onNewMessageChange} sendMessage={onSendMessageClick}
-                    dialogs={props.dialogsPage.dialogs} messages={props.dialogsPage.messages}
-                    messageBody={props.messageBody}/>
-
-
 }
+let mapDispatchToProps=(dispatch:Dispatch)=>{
+    return{
+        updateNewMessagebody:(body:string)=>{
+            dispatch(updateNewMessageBodyAC(body))
+        },
+        sendMessage:()=>{
+            dispatch(sendMessageAC())
+        }
+
+    }
+}
+export const DialogsContainer=connect(mapStateToProps,mapDispatchToProps)(Dialogs)

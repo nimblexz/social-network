@@ -1,5 +1,5 @@
 import {DialogsPageType} from "./store";
-import {ActionType} from "./profile-reducer";
+import {ActionType, ProfilePageType} from "./profile-reducer";
 
 
 export type AddNewMessageBodyType = ReturnType<typeof updateNewMessageBodyAC>
@@ -15,7 +15,23 @@ export const sendMessageAC = () => {
         type: 'SEND-MESSAGE',
     } as const
 }
-export const dialogsReducer = (state: DialogsPageType, action:ActionType): DialogsPageType => {
+const initialState: DialogsPageType = {
+    dialogs: [
+        {id: 1, name: 'Dimych'},
+        {id: 2, name: 'Andrey'},
+        {id: 3, name: 'Ignat'},
+        {id: 4, name: 'Sveta'},
+        {id: 5, name: 'Dasha'},
+        {id: 6, name: 'Victor '}
+    ],
+    messages: [
+        {id: 1, message: 'Hi'},
+        {id: 2, message: 'Privet'},
+        {id: 3, message: 'Shalom'}
+    ],
+    newMessageBody: ''
+}
+export const dialogsReducer = (state:DialogsPageType=initialState, action:ActionType): DialogsPageType => {
     if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
         state.newMessageBody = action.newMessageBody
     } else if (action.type === 'SEND-MESSAGE') {

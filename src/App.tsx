@@ -16,7 +16,7 @@ type AppPropsType = {
     dispatch: (action: ActionType) => void
 }
 
-function App(props: AppPropsType) {
+function App() {
 
 
     return (
@@ -26,13 +26,9 @@ function App(props: AppPropsType) {
                 <Navbar/>
                 <div className="app-wrapper-content">
 
-                    <Route path="/dialogs" render={() => <DialogsContainer dialogsPage={props.store._state.dialogsPage}
-                                                                  messageBody={props.store._state.dialogsPage.newMessageBody}
-                                                                  dispatch={props.dispatch.bind(props.store)}/>}/>
+                    <Route path="/dialogs" render={() => <DialogsContainer/>}/>
                     <Route path="/profile"
-                           render={() => <Profile profilePage={props.store._state.profilePage}
-                                                  dispatch={props.dispatch.bind(props.store)}
-                           />}/>
+                           render={() => <Profile/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>

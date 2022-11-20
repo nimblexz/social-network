@@ -1,12 +1,10 @@
-import {DialogsPageType, ProfilePageType} from "../../redux/store";
+import {DialogsPageType} from "../../redux/store";
 import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
-import {ActionType, addPostAC, changeNewTextAC} from "../../redux/profile-reducer";
+import {ActionType} from "../../redux/profile-reducer";
 import {Dialogs} from "./Dialogs";
 import {AppStateType, store} from "../../redux/redux-store";
 import {Dispatch} from "redux";
-import {ChangeEvent} from "react";
 import {connect} from "react-redux";
-import {MyPosts} from "../Profile/MyPosts/MyPosts";
 
 
 

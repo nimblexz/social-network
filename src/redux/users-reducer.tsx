@@ -38,11 +38,12 @@ export const setUsersAC = (Users:UsersType[]) => {
 }
 export type UsersType = {
     id: number
-    fullName: string
+    name: string
     status: string
-    location: { city: string, country: string }
+    photos:{small:string,large:string}
+    location?: { city: string, country: string }
     followed: boolean
-    photourl:string
+
 }
 export type UsersPageType = {
     users: UsersType[]

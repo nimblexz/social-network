@@ -10,7 +10,7 @@ type UsersPropsType = {
 }
 
 export function Users(props: UsersPropsType) {
-
+let getUsers=()=>{
     if (props.users.length === 0) {
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response=>{
 
@@ -18,8 +18,11 @@ export function Users(props: UsersPropsType) {
         })
 
     }
+}
+
     return (
         <div>
+            <button onClick={getUsers}>getUsers</button>
             {props.users.map(u => <div key={u.id}>
                 <span>
                     <div>

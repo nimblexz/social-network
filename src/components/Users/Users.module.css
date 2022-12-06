@@ -2,3 +2,7 @@
     width: 70px;
     height: 70px;
 }
+.selectedPages{
+    font-weight: bold;
+    color: #c2e188;
+}

@@ -10,12 +10,16 @@ type MyPostsContainerType = {
     profilePage: ProfilePageType
     dispatch: (action: ActionType) => any
 }
-
-let mapStateToProps=(state:AppStateType):ProfilePageType=>{
+type MyPostsType={
+    posts: Array<PostType>
+    message: string
+}
+let mapStateToProps=(state:AppStateType):MyPostsType=>{
 
     return{
         message:state.profilePage.message,
         posts:state.profilePage.posts
+
 
     }
 }

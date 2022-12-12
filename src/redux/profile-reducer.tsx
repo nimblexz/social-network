@@ -4,18 +4,26 @@ import {AppStateType} from "./redux-store";
 
 export type AddPostActionType = ReturnType<typeof addPostAC>
 export type ChangeTextActionType = ReturnType<typeof changeNewTextAC>
+export type setUserProfileActionType = ReturnType<typeof setUserProfile>
 export type ProfilePageType = {
     posts: Array<PostType>
     message: string
+    profile:any
 
 }
-export type ActionType = AddPostActionType | ChangeTextActionType | AddNewMessageBodyType | AddSendMessageType
+export type ActionType = AddPostActionType | ChangeTextActionType | AddNewMessageBodyType | AddSendMessageType | setUserProfileActionType
 
 
 export const addPostAC = (postMessage: string) => {
     return {
         type: 'ADD-POST',
         message: postMessage
+    } as const
+}
+export const setUserProfile = (profile:any) => {
+    return {
+        type: 'SET-USER-PROFILE',
+profile
     } as const
 }
 export const changeNewTextAC = (newText: string) => {
@@ -30,7 +38,8 @@ const initialState: ProfilePageType = {
     posts: [
         {id: 1, message: 'poka', likes: 2},
         {id: 2, message: 'privet', likes: 6}
-    ]
+    ],
+    profile:null
 }
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionType): ProfilePageType => {
@@ -47,6 +56,9 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 
 
             return {...state, message: action.message}
+        case "SET-USER-PROFILE":{
+            return {...state,profile:action.profile}
+        }
 
         default:
             return state

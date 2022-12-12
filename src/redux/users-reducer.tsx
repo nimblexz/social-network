@@ -1,12 +1,12 @@
 import {AddNewMessageBodyType, AddSendMessageType} from "./dialogs-reducer";
 import {AddPostActionType, ChangeTextActionType} from "./profile-reducer";
 
-export type FollowActionType = ReturnType<typeof followAC>
-export type UnfollowActionType = ReturnType<typeof unfollowAC>
-export type SetUsersACActionType = ReturnType<typeof setUsersAC>
-export type setTotalUsersACActionType = ReturnType<typeof setTotalUsersAC>
-export type SetCurrentPageACActionType = ReturnType<typeof setCurrentPageAC>
-export type ToggleIsFetchingACActionType = ReturnType<typeof SetIsFetchingAC>
+export type FollowActionType = ReturnType<typeof follow>
+export type UnfollowActionType = ReturnType<typeof unfollow>
+export type SetUsersACActionType = ReturnType<typeof setUsers>
+export type setTotalUsersACActionType = ReturnType<typeof setTotalUsersCount>
+export type SetCurrentPageACActionType = ReturnType<typeof setCurrentPage>
+export type ToggleIsFetchingACActionType = ReturnType<typeof SetIsFetching>
 export type ActionType =
     AddPostActionType
     | ChangeTextActionType
@@ -20,42 +20,42 @@ export type ActionType =
     | ToggleIsFetchingACActionType
 
 
-export const followAC = (userID: number) => {
+export const follow = (userID: number) => {
     return {
         type: 'FOLLOW',
         userID: userID
 
     } as const
 }
-export const SetIsFetchingAC = (isFetching:boolean) => {
+export const SetIsFetching = (isFetching:boolean) => {
     return {
         type: 'TOGGLE-IS-FETCHING',
         isFetching: isFetching
 
     } as const
 }
-export const setCurrentPageAC = (currentPage: number) => {
+export const setCurrentPage = (currentPage: number) => {
     return {
         type: 'SET-CURRENT-PAGE',
         currentPage: currentPage
 
     } as const
 }
-export const setTotalUsersAC = (totalcount: number) => {
+export const setTotalUsersCount = (totalcount: number) => {
     return {
         type: 'SET-TOTAL-USERS-COUNT',
         totalcount: totalcount
 
     } as const
 }
-export const unfollowAC = (userID: number) => {
+export const unfollow = (userID: number) => {
     return {
         type: 'UNFOLLOW',
         userID: userID
 
     } as const
 }
-export const setUsersAC = (Users: UsersType[]) => {
+export const setUsers = (Users: UsersType[]) => {
     return {
         type: 'SET-USERS',
         users: Users

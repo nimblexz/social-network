@@ -18,7 +18,8 @@ export type StoreType = {
             posts: [
                 {id: 1, message: 'poka', likes: 2},
                 {id: 2, message: 'privet', likes: 6}
-            ]
+            ],
+            profile:1
 
         },
         dialogsPage: {
@@ -78,6 +79,7 @@ export type DialogType = {
 export type ProfilePageType = {
     posts: Array<PostType>
     message: string
+    profile:any
 
 
 }

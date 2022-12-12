@@ -4,6 +4,7 @@ import React from "react";
 
 import {UsersType} from "../../redux/users-reducer";
 import axios from "axios";
+import {NavLink} from "react-router-dom";
 
 type UsersPropsType = {
     users: UsersType[]
@@ -14,8 +15,8 @@ type UsersPropsType = {
     totalUsersCount: number
     currentPage: number
     setCurrentPage: (p: number) => void
-    onPageChanged:(p:number)=>void
-    isFetching:boolean
+    onPageChanged: (p: number) => void
+    isFetching: boolean
 
 }
 export const Users = (props: UsersPropsType) => {
@@ -36,8 +37,14 @@ export const Users = (props: UsersPropsType) => {
         {props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
-<img className={s.userPhoto} src={u.photos.small != null ? u.photos.small : userphoto}/>
-                </div>
+                        <NavLink to={'/profile/'+u.id}>
+
+                            <img className={s.userPhoto} src={u.photos.small != null ? u.photos.small : userphoto}/>
+
+                        </NavLink>
+
+
+                    </div>
                     <div>{u.followed
                         ? <button onClick={() => {
                             props.unfollow(u.id)
@@ -56,7 +63,7 @@ export const Users = (props: UsersPropsType) => {
                         <div>{'u.location.country'}</div>
                         <div>{'u.location.city'}</div>
                     </span>
-                </span>
+            </span>
         </div>)}
     </div>
 }

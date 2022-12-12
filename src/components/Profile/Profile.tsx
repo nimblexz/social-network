@@ -9,13 +9,16 @@ export type ProfileStateType = {
     profilePage: ProfilePageType
     dispatch: (action: ActionType) => void
 }
+type ProfilePropsType={
+    profile:any
+}
 
-export function Profile() {
+export function Profile(props:ProfilePropsType) {
 
 
     return (
         <div>
-            <ProfileInfo/>
+            <ProfileInfo profile={props.profile}/>
             <MyPostsContainer/>
         </div>
     )

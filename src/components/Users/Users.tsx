@@ -15,6 +15,7 @@ type UsersPropsType = {
     currentPage: number
     setCurrentPage: (p: number) => void
     onPageChanged:(p:number)=>void
+    isFetching:boolean
 
 }
 export const Users = (props: UsersPropsType) => {

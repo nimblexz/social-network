@@ -6,6 +6,7 @@ export type UnfollowActionType = ReturnType<typeof unfollowAC>
 export type SetUsersACActionType = ReturnType<typeof setUsersAC>
 export type setTotalUsersACActionType = ReturnType<typeof setTotalUsersAC>
 export type SetCurrentPageACActionType = ReturnType<typeof setCurrentPageAC>
+export type ToggleIsFetchingACActionType = ReturnType<typeof SetIsFetchingAC>
 export type ActionType =
     AddPostActionType
     | ChangeTextActionType
@@ -16,12 +17,20 @@ export type ActionType =
     | SetUsersACActionType
     | SetCurrentPageACActionType
     | setTotalUsersACActionType
+    | ToggleIsFetchingACActionType
 
 
 export const followAC = (userID: number) => {
     return {
         type: 'FOLLOW',
         userID: userID
+
+    } as const
+}
+export const SetIsFetchingAC = (isFetching:boolean) => {
+    return {
+        type: 'TOGGLE-IS-FETCHING',
+        isFetching: isFetching
 
     } as const
 }
@@ -32,7 +41,7 @@ export const setCurrentPageAC = (currentPage: number) => {
 
     } as const
 }
-export const setTotalUsersAC = (totalcount:number) => {
+export const setTotalUsersAC = (totalcount: number) => {
     return {
         type: 'SET-TOTAL-USERS-COUNT',
         totalcount: totalcount
@@ -68,12 +77,14 @@ export type UsersPageType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 const initialState: UsersPageType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 export const usersReducer = (state: UsersPageType = initialState, action: ActionType): UsersPageType => {
@@ -95,7 +106,9 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
         case 'SET-CURRENT-PAGE':
             return {...state, currentPage: action.currentPage}
         case "SET-TOTAL-USERS-COUNT":
-            return {...state,totalUsersCount:action.totalcount}
+            return {...state, totalUsersCount: action.totalcount}
+        case "TOGGLE-IS-FETCHING":
+            return {...state,isFetching:action.isFetching}
 
         default:
             return state

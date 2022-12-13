@@ -1,9 +1,10 @@
 import React from "react";
 import s from "./ProfileInfo.module.css"
 import Preloader from "../../common/preloader/Preloader";
+import {ProfileType} from "../ProfileContainer";
 
 type ProfileInfoPropsType={
-    profile:any
+    profile:ProfileType
 }
 export function ProfileInfo(props:ProfileInfoPropsType) {
     if (!props.profile){

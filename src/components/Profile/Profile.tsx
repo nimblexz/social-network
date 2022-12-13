@@ -3,6 +3,7 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {ProfilePageType} from "../../redux/store";
 import {ActionType} from "../../redux/profile-reducer";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
+import {ProfileType} from "./ProfileContainer";
 
 
 export type ProfileStateType = {
@@ -10,7 +11,7 @@ export type ProfileStateType = {
     dispatch: (action: ActionType) => void
 }
 type ProfilePropsType={
-    profile:any
+    profile:ProfileType
 }
 
 export function Profile(props:ProfilePropsType) {

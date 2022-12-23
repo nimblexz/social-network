@@ -1,6 +1,6 @@
 import {PostType} from "./store";
 import {AddNewMessageBodyType, AddSendMessageType} from "./dialogs-reducer";
-import {AppStateType} from "./redux-store";
+
 
 export type AddPostActionType = ReturnType<typeof addPostAC>
 export type ChangeTextActionType = ReturnType<typeof changeNewTextAC>

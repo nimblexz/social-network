@@ -1,5 +1,5 @@
 import {DialogsPageType} from "./store";
-import {ActionType, ProfilePageType} from "./profile-reducer";
+import {ActionType} from "./profile-reducer";
 
 
 export type AddNewMessageBodyType = ReturnType<typeof updateNewMessageBodyAC>

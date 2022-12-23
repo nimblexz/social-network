@@ -3,10 +3,10 @@ import s from "./Header.module.css"
 import {NavLink} from "react-router-dom";
 type HeaderPropsType={
     isAuth:boolean
-    login:string |null
+    login:string
 }
 export function Header(props:HeaderPropsType){
-    debugger
+
     return(
         <header className={s.header}>
             <img

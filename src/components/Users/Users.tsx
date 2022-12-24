@@ -17,6 +17,8 @@ type UsersPropsType = {
     setCurrentPage: (p: number) => void
     onPageChanged: (p: number) => void
     isFetching: boolean
+    isFollowing: any
+    SetIsFollowing: any
 
 }
 export const Users = (props: UsersPropsType) => {
@@ -46,8 +48,10 @@ export const Users = (props: UsersPropsType) => {
 
                     </div>
                     <div>{u.followed
-                        ? <button onClick={() => {
-                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,  {withCredentials: true}).then(response => {
+                        ? <button disabled={props.isFollowing.some((id:any)=>id===u.id)} onClick={() => {
+                            props.SetIsFollowing(u.id,true)
+                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {withCredentials: true}).then(response => {
+                                props.SetIsFollowing(u.id,false)
                                 if (response.data.resultCode === 0) {
                                     props.unfollow(u.id)
                                 }
@@ -56,8 +60,10 @@ export const Users = (props: UsersPropsType) => {
 
 
                         }}>Unfollow</button>
-                        : <button onClick={() => {
-                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{},  {withCredentials: true}).then(response => {
+                        : <button disabled={props.isFollowing.some((id:any)=>id===u.id)} onClick={() => {
+                            props.SetIsFollowing(u.id,true)
+                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {withCredentials: true}).then(response => {
+                                props.SetIsFollowing(u.id,false)
                                 if (response.data.resultCode === 0) {
                                     props.follow(u.id)
                                 }

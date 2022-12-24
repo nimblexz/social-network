@@ -4,6 +4,7 @@ import {AddPostActionType, ChangeTextActionType} from "./profile-reducer";
 export type FollowActionType = ReturnType<typeof follow>
 export type UnfollowActionType = ReturnType<typeof unfollow>
 export type SetUsersACActionType = ReturnType<typeof setUsers>
+export type ToggleIsFollowingACActionType = ReturnType<typeof SetIsFollowing>
 export type setTotalUsersACActionType = ReturnType<typeof setTotalUsersCount>
 export type SetCurrentPageACActionType = ReturnType<typeof setCurrentPage>
 export type ToggleIsFetchingACActionType = ReturnType<typeof SetIsFetching>
@@ -18,6 +19,7 @@ export type ActionType =
     | SetCurrentPageACActionType
     | setTotalUsersACActionType
     | ToggleIsFetchingACActionType
+    | ToggleIsFollowingACActionType
 
 
 export const follow = (userID: number) => {
@@ -27,7 +29,7 @@ export const follow = (userID: number) => {
 
     } as const
 }
-export const SetIsFetching = (isFetching:boolean) => {
+export const SetIsFetching = (isFetching: boolean) => {
     return {
         type: 'TOGGLE-IS-FETCHING',
         isFetching: isFetching
@@ -63,6 +65,13 @@ export const setUsers = (Users: UsersType[]) => {
 
     } as const
 }
+export const SetIsFollowing = (id:number,toggle: boolean) => {
+    return {
+        type: 'TOGGLE-FOLLOW',
+        id,
+        toggle
+    } as const
+}
 export type UsersType = {
     id: number
     name: string
@@ -78,13 +87,15 @@ export type UsersPageType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: number[]
 }
 const initialState: UsersPageType = {
     users: [],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: true,
+    followingInProgress: []
 }
 
 export const usersReducer = (state: UsersPageType = initialState, action: ActionType): UsersPageType => {
@@ -108,7 +119,12 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
         case "SET-TOTAL-USERS-COUNT":
             return {...state, totalUsersCount: action.totalcount}
         case "TOGGLE-IS-FETCHING":
-            return {...state,isFetching:action.isFetching}
+            return {...state, isFetching: action.isFetching}
+        case "TOGGLE-FOLLOW":
+            return {
+                ...state,
+                followingInProgress: action.toggle ? [...state.followingInProgress,action.id] : state.followingInProgress.filter(id => id !== action.id)
+            }
 
         default:
             return state

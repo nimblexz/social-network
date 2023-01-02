@@ -1,5 +1,6 @@
 import {PostType} from "./store";
 import {AddNewMessageBodyType, AddSendMessageType} from "./dialogs-reducer";
+import {usersAPI} from "../api/api";
 
 
 export type AddPostActionType = ReturnType<typeof addPostAC>
@@ -41,7 +42,11 @@ const initialState: ProfilePageType = {
     ],
     profile:null
 }
-
+export const getUserProfile=(userID:string)=>(dispatch:any)=>{
+    usersAPI.getProfile(userID).then(response => {
+        dispatch(setUserProfile(response.data))
+    })
+}
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionType): ProfilePageType => {
 
     switch (action.type) {

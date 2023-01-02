@@ -1,4 +1,5 @@
 import React from "react";
+import {authAPI} from "../api/api";
 
 
 type SetUserDataActionType = ReturnType<typeof setUserData>
@@ -34,6 +35,14 @@ const initialState: authType = {
 }
 
 
+export const getAuthUserData=()=>(dispatch:any)=>{
+    authAPI.me().then(response => {
+        if (response.data.resultCode === 0) {
+            let {email, id, login} = response.data.data
+            dispatch(setUserData(email, id, login))
+        }
+    })
+}
 export const authReducer = (state: authType = initialState, action: ActionType): authType => {
 
     switch (action.type) {

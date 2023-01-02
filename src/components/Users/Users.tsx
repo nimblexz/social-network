@@ -3,22 +3,19 @@ import userphoto from "../../assets/images/197-1971414_avatars-clipart-generic-u
 import React from "react";
 
 import {UsersType} from "../../redux/users-reducer";
-import axios from "axios";
+
 import {NavLink} from "react-router-dom";
+
 
 type UsersPropsType = {
     users: UsersType[]
-    follow: (userID: number) => void
-    unfollow: (userID: number) => void
-    setUsers: (users: UsersType[]) => void
     pageSize: number
     totalUsersCount: number
     currentPage: number
-    setCurrentPage: (p: number) => void
     onPageChanged: (p: number) => void
-    isFetching: boolean
-    isFollowing: any
-    SetIsFollowing: any
+    isFollowing: number[]
+    unfollowed:(id:number)=>void
+    followed:(id:number)=>void
 
 }
 export const Users = (props: UsersPropsType) => {
@@ -48,28 +45,11 @@ export const Users = (props: UsersPropsType) => {
 
                     </div>
                     <div>{u.followed
-                        ? <button disabled={props.isFollowing.some((id:any)=>id===u.id)} onClick={() => {
-                            props.SetIsFollowing(u.id,true)
-                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {withCredentials: true}).then(response => {
-                                props.SetIsFollowing(u.id,false)
-                                if (response.data.resultCode === 0) {
-                                    props.unfollow(u.id)
-                                }
-
-                            })
-
-
+                        ? <button disabled={props.isFollowing.some((id: number) => id === u.id)} onClick={() => {
+                            props.unfollowed(u.id)
                         }}>Unfollow</button>
-                        : <button disabled={props.isFollowing.some((id:any)=>id===u.id)} onClick={() => {
-                            props.SetIsFollowing(u.id,true)
-                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {withCredentials: true}).then(response => {
-                                props.SetIsFollowing(u.id,false)
-                                if (response.data.resultCode === 0) {
-                                    props.follow(u.id)
-                                }
-
-                            })
-                        }}>Follow</button>}
+                        : <button disabled={props.isFollowing.some((id: number) => id === u.id)}
+                                  onClick={() => props.followed(u.id)}>Follow</button>}
                     </div>
                 </span>
             <span>

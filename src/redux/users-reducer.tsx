@@ -1,5 +1,7 @@
 import {AddNewMessageBodyType, AddSendMessageType} from "./dialogs-reducer";
 import {AddPostActionType, ChangeTextActionType} from "./profile-reducer";
+import {usersAPI} from "../api/api";
+
 
 export type FollowActionType = ReturnType<typeof follow>
 export type UnfollowActionType = ReturnType<typeof unfollow>
@@ -71,6 +73,34 @@ export const SetIsFollowing = (id:number,toggle: boolean) => {
         id,
         toggle
     } as const
+}
+
+export const getUsers=(currentPage:number,pageSize:number)=>(dispatch:any)=>{
+    dispatch(SetIsFetching(true))
+    usersAPI.getUsers(currentPage, pageSize).then(response => {
+        dispatch(setCurrentPage(currentPage))
+        dispatch(SetIsFetching(false))
+        dispatch(setUsers(response.items))
+        dispatch(setTotalUsersCount(response.totalCount))
+    })
+}
+export const followed=(id:number)=>(dispatch:any)=>{
+    dispatch(SetIsFollowing(id,true))
+    usersAPI.follow(id).then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(follow(id))
+        }
+        dispatch(SetIsFollowing(id,false))
+    })
+}
+export const unfollowed=(id:number)=>(dispatch:any)=>{
+    dispatch(SetIsFollowing(id,true))
+    usersAPI.unfollow(id).then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(unfollow(id))
+        }
+        dispatch(SetIsFollowing(id,false))
+    })
 }
 export type UsersType = {
     id: number

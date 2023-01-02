@@ -1,28 +1,22 @@
-import {DialogsPageType} from "../../redux/store";
 import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
-import {ActionType} from "../../redux/profile-reducer";
+
 import {Dialogs} from "./Dialogs";
-import {AppStateType, store} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 
 
 
-type DialogsContainerType = {
-    dialogsPage: DialogsPageType
-    messageBody: string
-    dispatch: (action: ActionType) => void
-}
 
 
 
-
-let mapStateToProps=(state:AppStateType):DialogsPageType=>{
+let mapStateToProps=(state:AppStateType)=>{
 
     return{
         dialogs:state.dialogsPage.dialogs,
         messages:state.dialogsPage.messages,
         newMessageBody:state.dialogsPage.newMessageBody,
+        isAuth:state.auth.isAuth
 
 
     }

@@ -24,7 +24,7 @@ type MapStateToProps = {
     dialogs:DialogType[]
     messages:MessageType[]
     newMessageBody:string
-    isAuth:boolean
+
 
 }
 type MapDispatchToProps = {
@@ -40,7 +40,7 @@ class DialogsContainer extends React.Component<DialogsContainerPropsType>{
 
     render() {
         return (
-            <Dialogs dialogs={this.props.dialogs} isAuth={this.props.isAuth} newMessageBody={this.props.newMessageBody} updateNewMessagebody={this.props.updateNewMessagebody} messages={this.props.messages} sendMessage={this.props.sendMessage}/>
+            <Dialogs dialogs={this.props.dialogs} newMessageBody={this.props.newMessageBody} updateNewMessagebody={this.props.updateNewMessagebody} messages={this.props.messages} sendMessage={this.props.sendMessage}/>
         )
     }
 }
@@ -51,8 +51,8 @@ let mapStateToProps=(state:AppStateType)=>{
     return{
         dialogs:state.dialogsPage.dialogs,
         messages:state.dialogsPage.messages,
-        newMessageBody:state.dialogsPage.newMessageBody,
-        isAuth:state.auth.isAuth
+        newMessageBody:state.dialogsPage.newMessageBody
+
 
 
     }

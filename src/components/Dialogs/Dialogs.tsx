@@ -12,7 +12,7 @@ type DialogsStateType = {
     newMessageBody: string
     updateNewMessagebody: (body: string) => void
     sendMessage: () => void
-    isAuth:boolean
+
 }
 
 export function Dialogs(props: DialogsStateType) {

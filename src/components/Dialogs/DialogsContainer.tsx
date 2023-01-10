@@ -1,7 +1,7 @@
 import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
 
 import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {connect} from "react-redux";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import React from "react";
@@ -68,5 +68,7 @@ let mapDispatchToProps=(dispatch:Dispatch)=>{
 
     }
 }
-let WithUrlDataContainerComponent=withRouter(DialogsContainer)
-export default withAuthRedirect(connect(mapStateToProps,mapDispatchToProps)(WithUrlDataContainerComponent))
+
+
+
+export default compose<React.ComponentType>(connect(mapStateToProps,mapDispatchToProps),withRouter,withAuthRedirect)(DialogsContainer)

@@ -23,6 +23,7 @@ type UsersContainerPropsType = {
     getUsers:(currentPage:number, pageSize:number)=>void
     unfollowed:(id:number)=>void
     followed:(id:number)=>void
+
 }
 
 class UsersContainer extends React.Component<UsersContainerPropsType> {
@@ -48,6 +49,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
                    followed={this.props.followed}
                    unfollowed={this.props.unfollowed}
                    isFollowing={this.props.isFollowing}
+
             />
         </>
     }
@@ -60,7 +62,8 @@ let mapStateToProps = (state: AppStateType) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        isFollowing:state.usersPage.followingInProgress
+        isFollowing:state.usersPage.followingInProgress,
+
 
     }
 }

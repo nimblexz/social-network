@@ -4,7 +4,7 @@ import React from "react";
 
 import {UsersType} from "../../redux/users-reducer";
 
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 
 
 type UsersPropsType = {
@@ -17,6 +17,7 @@ type UsersPropsType = {
     unfollowed:(id:number)=>void
     followed:(id:number)=>void
 
+
 }
 export const Users = (props: UsersPropsType) => {
 
@@ -26,6 +27,7 @@ export const Users = (props: UsersPropsType) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
+
     return <div>
         <div>
             {pages.map(p => <span onClick={() => {

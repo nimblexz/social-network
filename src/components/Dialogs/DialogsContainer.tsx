@@ -5,9 +5,10 @@ import {compose, Dispatch} from "redux";
 import {connect} from "react-redux";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import React from "react";
-import {Dialogs} from "./Dialogs";
+import {Dialogs, MessageType} from "./Dialogs";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
-import {DialogType, MessageType} from "../../redux/store";
+
+
 
 
 
@@ -18,7 +19,10 @@ type DialogsContainerPropsType =RouteComponentProps&OwnDialogsContainerPropsType
 
 
 
-
+export type DialogType = {
+    id: number
+    name: string
+}
 
 type MapStateToProps = {
     dialogs:DialogType[]

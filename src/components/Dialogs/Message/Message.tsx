@@ -1,5 +1,6 @@
 import s from "./../Dialogs.module.css"
-import {MessageType} from "../../../redux/store";
+import {MessageType} from "../Dialogs";
+
 
 
 

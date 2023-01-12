@@ -1,11 +1,14 @@
 import s from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
-import {DialogType, MessageType} from "../../redux/store";
+import {DialogType} from "../../redux/store";
 import {ChangeEvent} from "react";
 
 
-
+export type MessageType = {
+    id: number
+    message: string
+}
 type DialogsStateType = {
     dialogs: DialogType[]
     messages: MessageType[]

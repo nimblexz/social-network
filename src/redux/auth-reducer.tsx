@@ -6,7 +6,6 @@ type SetUserDataActionType = ReturnType<typeof setUserData>
 type ActionType = SetUserDataActionType
 
 export const setUserData = (email: string, id: string, login: string) => {
-    debugger
     return {
         type: 'SET-USER-DATA',
         data: {

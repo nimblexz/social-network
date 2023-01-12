@@ -1,5 +1,6 @@
-import {DialogsPageType} from "./store";
 import {ActionType} from "./profile-reducer";
+import {DialogType} from "./store";
+import {MessageType} from "../components/Dialogs/Dialogs";
 
 
 export type AddNewMessageBodyType = ReturnType<typeof updateNewMessageBodyAC>
@@ -14,6 +15,12 @@ export const sendMessageAC = () => {
     return {
         type: 'SEND-MESSAGE',
     } as const
+}
+export type DialogsPageType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+    newMessageBody: string
+
 }
 const initialState: DialogsPageType = {
     dialogs: [

@@ -1,7 +1,7 @@
-import {ActionType, profileReducer} from "./profile-reducer";
-import {dialogsReducer} from "./dialogs-reducer";
+import {ActionType, PostType, profileReducer} from "./profile-reducer";
+import {DialogsPageType, dialogsReducer} from "./dialogs-reducer";
 
-export type StoreType = {
+ type StoreType = {
     _state: StateType
     changeNewText: (newText: string) => void
     onChange: (state: StateType) => void
@@ -54,29 +54,22 @@ export type StoreType = {
         return this._state
     },
     dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        /*this._state.profilePage = profileReducer(this._state.profilePage, action)*/
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this.onChange(this._state)
     }
 }
 
 
-export type PostType = {
-    id: number
-    message: string
-    likes: number
-}
-export type MessageType = {
-    id: number
-    message: string
-}
+
+
 export type DialogType = {
     id: number
     name: string
 }
 
 
-export type ProfilePageType = {
+ type ProfilePageType = {
     posts: Array<PostType>
     message: string
     profile:any
@@ -87,12 +80,7 @@ export type DialogsStateType = {
     dialogsPage: DialogsPageType
     _state: StateType
 }
-export type DialogsPageType = {
-    dialogs: Array<DialogType>
-    messages: Array<MessageType>
-    newMessageBody: string
 
-}
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType

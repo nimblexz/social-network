@@ -1,15 +1,10 @@
 import React, {ChangeEvent} from "react";
-import {ActionType, addPostAC, changeNewTextAC} from "../../../redux/profile-reducer";
+import {addPostAC, changeNewTextAC, PostType} from "../../../redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
-import {PostType, ProfilePageType, StoreType} from "../../../redux/store";
 import {connect} from "react-redux";
-import {AppStateType, StateType, store} from "../../../redux/redux-store";
+import {AppStateType,store} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
 
-type MyPostsContainerType = {
-    profilePage: ProfilePageType
-    dispatch: (action: ActionType) => any
-}
 type MyPostsType={
     posts: Array<PostType>
     message: string

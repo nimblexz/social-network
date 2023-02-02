@@ -3,23 +3,17 @@ import {DialogType} from "./store";
 import {MessageType} from "../components/Dialogs/Dialogs";
 
 
-export type AddNewMessageBodyType = ReturnType<typeof updateNewMessageBodyAC>
 export type AddSendMessageType = ReturnType<typeof sendMessageAC>
-export const updateNewMessageBodyAC = (body: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-BODY',
-        newMessageBody: body
-    } as const
-}
-export const sendMessageAC = () => {
+
+export const sendMessageAC = (newMessageBody:string) => {
     return {
         type: 'SEND-MESSAGE',
+        newMessageBody
     } as const
 }
 export type DialogsPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageBody: string
 
 }
 const initialState: DialogsPageType = {
@@ -35,18 +29,13 @@ const initialState: DialogsPageType = {
         {id: 1, message: 'Hi'},
         {id: 2, message: 'Privet'},
         {id: 3, message: 'Shalom'}
-    ],
-    newMessageBody: ''
+    ]
 }
 export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionType): DialogsPageType => {
     switch (action.type) {
-        case 'UPDATE-NEW-MESSAGE-BODY':
-
-            return {...state, newMessageBody: action.newMessageBody}
-
         case 'SEND-MESSAGE':
-            let body = state.newMessageBody
-            return {...state, messages: [...state.messages, {id: 7, message: body}], newMessageBody: ''}
+            let body = action.newMessageBody
+            return {...state, messages: [...state.messages, {id: 7, message: body}]}
         default:
             return state
     }

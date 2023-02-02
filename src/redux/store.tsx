@@ -36,7 +36,7 @@ import {DialogsPageType, dialogsReducer} from "./dialogs-reducer";
                 {id: 2, message: 'Privet'},
                 {id: 3, message: 'Shalom'}
             ],
-            newMessageBody: ''
+
         }
 
     },

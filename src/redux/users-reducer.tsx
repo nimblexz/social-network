@@ -1,4 +1,4 @@
-import {AddNewMessageBodyType, AddSendMessageType} from "./dialogs-reducer";
+import {AddSendMessageType} from "./dialogs-reducer";
 import {AddPostActionType, ChangeTextActionType} from "./profile-reducer";
 import {usersAPI} from "../api/api";
 
@@ -13,7 +13,6 @@ export type ToggleIsFetchingACActionType = ReturnType<typeof SetIsFetching>
 export type ActionType =
     AddPostActionType
     | ChangeTextActionType
-    | AddNewMessageBodyType
     | AddSendMessageType
     | FollowActionType
     | UnfollowActionType

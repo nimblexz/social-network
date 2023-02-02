@@ -1,4 +1,4 @@
-import {AddNewMessageBodyType, AddSendMessageType} from "./dialogs-reducer";
+import {AddSendMessageType} from "./dialogs-reducer";
 import {profileAPI} from "../api/api";
 
 
@@ -19,13 +19,13 @@ export type ProfilePageType = {
     profile:null|number
 
 }
-export type ActionType = AddPostActionType | ChangeTextActionType | AddNewMessageBodyType | AddSendMessageType | setUserProfileActionType|setUserStatusActionType
+export type ActionType = AddPostActionType | ChangeTextActionType  | AddSendMessageType | setUserProfileActionType|setUserStatusActionType
 
 
-export const addPostAC = (postMessage: string) => {
+export const addPostAC = (newPostText: string) => {
     return {
         type: 'ADD-POST',
-        message: postMessage
+        newPostText
     } as const
 }
 export const setUserProfile = (profile:any) => {
@@ -82,14 +82,10 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
         case 'ADD-POST':
             let newPost: PostType = {
                 id: 3,
-                message: action.message,
+                message: action.newPostText,
                 likes: 72
             }
             return {...state, posts: [...state.posts, newPost], message: ''}
-        case 'UPDATE-NEW-POST-TEXT':
-
-
-            return {...state, message: action.message}
         case "SET-USER-PROFILE":{
             return {...state,profile:action.profile}
         }

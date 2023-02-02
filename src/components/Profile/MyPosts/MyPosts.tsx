@@ -1,48 +1,43 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {PostType} from "../../../redux/profile-reducer";
+import {Field, reduxForm} from "redux-form";
 
 type MyPostsType = {
-    adding: () => void
-    newText: (e: ChangeEvent<HTMLTextAreaElement>) => void
-    posts:PostType[]
-    message:string
+    posts: PostType[]
+    message: string
+    addPost: (newPostText: string) => void
 
 }
+let AddNewPostForm = (props: any) => {
+    return <form onSubmit={props.handleSubmit}>
+        <div>
+            <Field name='newPostText' component='textarea'/>
+        </div>
+        <div>
+            <button>Add post</button>
+        </div>
+    </form>
+}
+let AddNewPostReduxForm = reduxForm({form: 'ProfileAddNewPostForm'})(AddNewPostForm)
 
 export function MyPosts(props: MyPostsType) {
 
 
     let postsElements = props.posts.map(p => <Post message={p.message} likes={p.likes} id={p.id}/>)
 
-    let AddPost = () => {
-        props.adding()
-
-    }
-    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.newText(e)
+    let onAddPost = (values: any) => {
+        props.addPost(values.newPostText)
     }
     return (
-        <>
-
-            <div className={s.postsBlock}>
-                <h3>My posts</h3>
-                <div>
-
-                    <div>
-                        <textarea value={props.message} onChange={newTextChangeHandler}/>
-                    </div>
-
-                    <div>
-                        <button onClick={AddPost}>Add post</button>
-                    </div>
-                </div>
-                <div>New post</div>
-                <div className={s.posts}>
-                    {postsElements}
-                </div>
+        <div className={s.postsBlock}>
+            <h3>My posts</h3>
+            <AddNewPostReduxForm onSubmit={onAddPost}/>
+            <div>New post</div>
+            <div className={s.posts}>
+                {postsElements}
             </div>
-        </>
+        </div>
     )
 }

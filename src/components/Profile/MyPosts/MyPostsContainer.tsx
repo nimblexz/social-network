@@ -1,8 +1,7 @@
-import React, {ChangeEvent} from "react";
-import {addPostAC, changeNewTextAC, PostType} from "../../../redux/profile-reducer";
+import {addPostAC, PostType} from "../../../redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
-import {AppStateType,store} from "../../../redux/redux-store";
+import {AppStateType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
 
 type MyPostsType={
@@ -20,11 +19,8 @@ let mapStateToProps=(state:AppStateType):MyPostsType=>{
 }
 let mapDispatchToProps=(dispatch:Dispatch)=>{
     return{
-        adding:()=>{
-            dispatch(addPostAC(store.getState().profilePage.message))
-        },
-        newText:(e: ChangeEvent<HTMLTextAreaElement>)=>{
-            dispatch(changeNewTextAC(e.currentTarget.value))
+        addPost:(newPostText:string)=>{
+            dispatch(addPostAC(newPostText))
         }
     }
 }

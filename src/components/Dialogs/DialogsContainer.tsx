@@ -1,4 +1,4 @@
-import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
+import {sendMessageAC} from "../../redux/dialogs-reducer";
 
 import {AppStateType} from "../../redux/redux-store";
 import {compose, Dispatch} from "redux";
@@ -33,7 +33,7 @@ type MapStateToProps = {
 }
 type MapDispatchToProps = {
     sendMessage:() => void
-    updateNewMessagebody:(body: string) => void
+
 }
 type OwnDialogsContainerPropsType=MapStateToProps&MapDispatchToProps
 
@@ -44,7 +44,7 @@ class DialogsContainer extends React.Component<DialogsContainerPropsType>{
 
     render() {
         return (
-            <Dialogs dialogs={this.props.dialogs} newMessageBody={this.props.newMessageBody} updateNewMessagebody={this.props.updateNewMessagebody} messages={this.props.messages} sendMessage={this.props.sendMessage}/>
+            <Dialogs dialogs={this.props.dialogs} newMessageBody={this.props.newMessageBody}  messages={this.props.messages} sendMessage={this.props.sendMessage}/>
         )
     }
 }
@@ -54,8 +54,8 @@ let mapStateToProps=(state:AppStateType)=>{
 
     return{
         dialogs:state.dialogsPage.dialogs,
-        messages:state.dialogsPage.messages,
-        newMessageBody:state.dialogsPage.newMessageBody
+        messages:state.dialogsPage.messages
+
 
 
 
@@ -63,11 +63,8 @@ let mapStateToProps=(state:AppStateType)=>{
 }
 let mapDispatchToProps=(dispatch:Dispatch)=>{
     return{
-        updateNewMessagebody:(body:string)=>{
-            dispatch(updateNewMessageBodyAC(body))
-        },
-        sendMessage:()=>{
-            dispatch(sendMessageAC())
+        sendMessage:(newMessageBody:string)=>{
+            dispatch(sendMessageAC(newMessageBody))
         }
 
     }

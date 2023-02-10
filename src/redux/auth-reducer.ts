@@ -14,7 +14,6 @@ export const setUserData = (email: string | null, id: string | null, login: stri
             login,
             isAuth
         }
-
     } as const
 }
 type authType = {
@@ -32,7 +31,7 @@ const initialState: authType = {
 
 
 export const getAuthUserData = () => (dispatch: any) => {
-    authAPI.me().then(response => {
+    return authAPI.me().then(response => {
         if (response.data.resultCode === 0) {
             let {email, id, login} = response.data.data
             dispatch(setUserData(email, id, login, true))

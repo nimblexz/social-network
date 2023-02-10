@@ -79,4 +79,4 @@ export default compose<React.ComponentType>(connect (mapStateToProps, {
     getUsers,
     followed,
     unfollowed
-}),withAuthRedirect)(UsersContainer)
+}))(UsersContainer)

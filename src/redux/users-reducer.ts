@@ -74,10 +74,10 @@ export const SetIsFollowing = (id:number,toggle: boolean) => {
     } as const
 }
 
-export const getUsers=(currentPage:number,pageSize:number)=>(dispatch:any)=>{
+export const requestUsers=(page:number, pageSize:number)=>(dispatch:any)=>{
     dispatch(SetIsFetching(true))
-    usersAPI.getUsers(currentPage, pageSize).then(response => {
-        dispatch(setCurrentPage(currentPage))
+    usersAPI.getUsers(page, pageSize).then(response => {
+        dispatch(setCurrentPage(page))
         dispatch(SetIsFetching(false))
         dispatch(setUsers(response.items))
         dispatch(setTotalUsersCount(response.totalCount))
@@ -116,7 +116,7 @@ export type UsersPageType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
-    followingInProgress: number[]
+    isFollowing: number[]
 }
 const initialState: UsersPageType = {
     users: [],
@@ -124,7 +124,7 @@ const initialState: UsersPageType = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
-    followingInProgress: []
+    isFollowing: []
 }
 
 export const usersReducer = (state: UsersPageType = initialState, action: ActionType): UsersPageType => {
@@ -152,7 +152,7 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
         case "TOGGLE-FOLLOW":
             return {
                 ...state,
-                followingInProgress: action.toggle ? [...state.followingInProgress,action.id] : state.followingInProgress.filter(id => id !== action.id)
+                isFollowing: action.toggle ? [...state.isFollowing,action.id] : state.isFollowing.filter(id => id !== action.id)
             }
 
         default:

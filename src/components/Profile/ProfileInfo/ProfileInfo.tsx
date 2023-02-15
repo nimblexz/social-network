@@ -2,7 +2,7 @@ import React from "react";
 import s from "./ProfileInfo.module.css"
 import Preloader from "../../common/preloader/Preloader";
 import {ProfileType} from "../ProfileContainer";
-import {ProfileStatus} from "./ProfileStatus";
+import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 
 type ProfileInfoPropsType={
     profile:ProfileType
@@ -21,9 +21,9 @@ export function ProfileInfo(props:ProfileInfoPropsType) {
             {/*        src="https://million-wallpapers.ru/wallpapers/4/98/531441352518448/raznocvetnye-kamni-maakrosemka.jpg"/>*/}
             {/*</div>*/}
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.small}/>
+                <img src={props.profile.photos.small} alt={'avatar'}/>
                 ava+description
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
 

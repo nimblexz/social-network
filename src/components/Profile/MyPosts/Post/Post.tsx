@@ -6,7 +6,7 @@ export function Post(props:PostType) {
 
 
         <div className={s.item}>
-            <img src="https://cdn-images-1.medium.com/max/1200/1*M6GAZJcW_nD3dsb_OSkp5w.jpeg"/>
+            <img src="https://cdn-images-1.medium.com/max/1200/1*M6GAZJcW_nD3dsb_OSkp5w.jpeg" alt={'item'}/>
             {props.message}
             <div>likes {props.likes} id:{props.id}</div>
 

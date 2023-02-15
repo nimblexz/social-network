@@ -4,7 +4,7 @@ import React from "react";
 
 import {UsersType} from "../../redux/users-reducer";
 
-import {NavLink, Redirect} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 
 type UsersPropsType = {
@@ -40,7 +40,7 @@ export const Users = (props: UsersPropsType) => {
                     <div>
                         <NavLink to={'/profile/' + u.id}>
 
-                            <img className={s.userPhoto} src={u.photos.small != null ? u.photos.small : userphoto}/>
+                            <img className={s.userPhoto} src={u.photos.small != null ? u.photos.small : userphoto} alt={'userPhoto'}/>
 
                         </NavLink>
 

@@ -17,12 +17,11 @@ export let reducer = combineReducers({
 
 })
 export let store = createStore(reducer,applyMiddleware(thunk))
-export type ReducerType=typeof reducer
-export type AppStateType=ReturnType<ReducerType>
-export type StateType=ReturnType<typeof store.getState>
+export type AppStateType=ReturnType<typeof reducer>
 
 
-//export type AppStateType=ReturnType<typeof reducers>
+
+
 
 
 

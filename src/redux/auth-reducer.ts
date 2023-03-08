@@ -1,5 +1,6 @@
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {Dispatch} from "redux";
 
 
 type SetUserDataActionType = ReturnType<typeof setUserData>
@@ -7,7 +8,7 @@ type ActionType = SetUserDataActionType
 
 export const setUserData = (email: string | null, id: string | null, login: string | null, isAuth: boolean) => {
     return {
-        type: 'SET-USER-DATA',
+        type: 'social-network/auth/SET-USER-DATA',
         payload: {
             email,
             id,
@@ -30,39 +31,35 @@ const initialState: authType = {
 }
 
 
-export const getAuthUserData = () => (dispatch: any) => {
-    return authAPI.me().then(response => {
-        if (response.data.resultCode === 0) {
-            let {email, id, login} = response.data.data
-            dispatch(setUserData(email, id, login, true))
-        }
-    })
+export const getAuthUserData = () => async (dispatch: Dispatch) => {
+    let response = await authAPI.me()
+    if (response.data.resultCode === 0) {
+        let {email, id, login} = response.data.data
+        dispatch(setUserData(email, id, login, true))
+    }
 }
-export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
-    authAPI.login(email, password, rememberMe).then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(getAuthUserData())
-        } else{
-            let message=response.data.messages.length>0 ? response.data.messages[0]:'Some error'
-            dispatch(stopSubmit('login',{_error:message}))
-        }
-    })
+export const login = (email: string, password: string, rememberMe: boolean) => async (dispatch: Dispatch<any>) => {
+    let response = await authAPI.login(email, password, rememberMe)
+    if (response.data.resultCode === 0) {
+        dispatch(getAuthUserData())
+    } else {
+        let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+        dispatch(stopSubmit('login', {_error: message}))
+    }
 }
-export const logout = () => (dispatch: any) => {
-    authAPI.logout().then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(setUserData(null, null, null, false))
-        }
-    })
+export const logout = () => async (dispatch: Dispatch) => {
+    let response = await authAPI.logout()
+    if (response.data.resultCode === 0) {
+        dispatch(setUserData(null, null, null, false))
+    }
 }
 export const authReducer = (state: authType = initialState, action: ActionType): authType => {
 
     switch (action.type) {
-        case 'SET-USER-DATA':
+        case 'social-network/auth/SET-USER-DATA':
             return {
                 ...state, ...action.payload
             }
-
         default:
             return state
     }

@@ -1,5 +1,4 @@
 import {sendMessageAC} from "../../redux/dialogs-reducer";
-
 import {AppStateType} from "../../redux/redux-store";
 import {compose, Dispatch} from "redux";
 import {connect} from "react-redux";
@@ -9,15 +8,7 @@ import {Dialogs, MessageType} from "./Dialogs";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
-
-
-
-
-type DialogsContainerPropsType =RouteComponentProps&OwnDialogsContainerPropsType
-
-
-
-
+type DialogsContainerPropsType = RouteComponentProps & OwnDialogsContainerPropsType
 
 export type DialogType = {
     id: number
@@ -25,47 +16,38 @@ export type DialogType = {
 }
 
 type MapStateToProps = {
-    dialogs:DialogType[]
-    messages:MessageType[]
-    newMessageBody:string
-
-
+    dialogs: DialogType[]
+    messages: MessageType[]
+    newMessageBody: string
 }
 type MapDispatchToProps = {
-    sendMessage:() => void
-
+    sendMessage: () => void
 }
-type OwnDialogsContainerPropsType=MapStateToProps&MapDispatchToProps
+type OwnDialogsContainerPropsType = MapStateToProps & MapDispatchToProps
 
-class DialogsContainer extends React.Component<DialogsContainerPropsType>{
-    componentDidMount() {
-
-    }
-
+class DialogsContainer extends React.Component<DialogsContainerPropsType> {
     render() {
         return (
-            <Dialogs dialogs={this.props.dialogs} newMessageBody={this.props.newMessageBody}  messages={this.props.messages} sendMessage={this.props.sendMessage}/>
+            <Dialogs dialogs={this.props.dialogs} newMessageBody={this.props.newMessageBody}
+                     messages={this.props.messages} sendMessage={this.props.sendMessage}/>
         )
     }
 }
 
 
-let mapStateToProps=(state:AppStateType)=>{
-
-    return{
-        dialogs:state.dialogsPage.dialogs,
-        messages:state.dialogsPage.messages
+let mapStateToProps = (state: AppStateType) => {
+    return {
+        dialogs: state.dialogsPage.dialogs,
+        messages: state.dialogsPage.messages
     }
 }
-let mapDispatchToProps=(dispatch:Dispatch)=>{
-    return{
-        sendMessage:(newMessageBody:string)=>{
+let mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
+        sendMessage: (newMessageBody: string) => {
             dispatch(sendMessageAC(newMessageBody))
         }
-
     }
 }
 
 
-
-export default compose<React.ComponentType>(connect(mapStateToProps,mapDispatchToProps),withRouter,withAuthRedirect)(DialogsContainer)
+export default compose<React.ComponentType>(connect(mapStateToProps, mapDispatchToProps), withRouter, withAuthRedirect)(DialogsContainer)

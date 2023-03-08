@@ -1,6 +1,6 @@
 import {ActionType} from "./profile-reducer";
-import {DialogType} from "./store";
 import {MessageType} from "../components/Dialogs/Dialogs";
+import {DialogType} from "../components/Dialogs/DialogsContainer";
 
 
 export type AddSendMessageType = ReturnType<typeof sendMessageAC>

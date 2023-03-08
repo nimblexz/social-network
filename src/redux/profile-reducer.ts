@@ -1,5 +1,6 @@
 import {AddSendMessageType} from "./dialogs-reducer";
 import {profileAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 
 export type AddPostActionType = ReturnType<typeof addPostAC>
@@ -16,10 +17,15 @@ export type ProfilePageType = {
     status: string;
     posts: Array<PostType>
     message: string
-    profile:null|number
+    profile: null | number
 
 }
-export type ActionType = AddPostActionType | ChangeTextActionType  | AddSendMessageType | setUserProfileActionType|setUserStatusActionType
+export type ActionType =
+    AddPostActionType
+    | ChangeTextActionType
+    | AddSendMessageType
+    | setUserProfileActionType
+    | setUserStatusActionType
 
 
 export const addPostAC = (newPostText: string) => {
@@ -28,24 +34,24 @@ export const addPostAC = (newPostText: string) => {
         newPostText
     } as const
 }
-export const setUserProfile = (profile:any) => {
+export const setUserProfile = (profile: any) => {
     return {
         type: 'SET-USER-PROFILE',
-profile
+        profile
     } as const
 }
-export const setUserStatus = (status:string) => {
+export const setUserStatus = (status: string) => {
     return {
         type: "SET-USER-STATUS",
-status
+        status
     } as const
 }
 
 
-export const changeNewTextAC = (newText: string) => {
+export const changeNewTextAC = (message: string) => {
     return {
         type: 'UPDATE-NEW-POST-TEXT',
-        message: newText
+        message
     } as const
 }
 
@@ -55,29 +61,24 @@ const initialState: ProfilePageType = {
         {id: 1, message: 'poka', likes: 2},
         {id: 2, message: 'privet', likes: 6}
     ],
-    profile:null,
-    status:''
+    profile: null,
+    status: ''
 }
-export const getUserProfile=(userID:string)=>(dispatch:any)=>{
-    profileAPI.getProfile(userID).then(response => {
-        dispatch(setUserProfile(response.data))
-    })
+export const getUserProfile = (userID: string) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.getProfile(userID)
+    dispatch(setUserProfile(response.data))
 }
-export const getUserStatus=(userID:string)=>(dispatch:any)=>{
-    profileAPI.getStatus(userID).then(response => {
-        dispatch(setUserStatus(response.data))
-    })
+export const getUserStatus = (userID: string) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.getStatus(userID)
+    dispatch(setUserStatus(response.data))
 }
-export const updateUserStatus=(status:string)=>(dispatch:any)=>{
-    profileAPI.updateStatus(status).then(response => {
-        if (response.data.resultCode===0){
-            dispatch(setUserStatus(status))
-        }
-
-    })
+export const updateUserStatus = (status: string) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setUserStatus(status))
+    }
 }
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionType): ProfilePageType => {
-
     switch (action.type) {
         case 'ADD-POST':
             let newPost: PostType = {
@@ -86,14 +87,11 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
                 likes: 72
             }
             return {...state, posts: [...state.posts, newPost], message: ''}
-        case "SET-USER-PROFILE":{
-            return {...state,profile:action.profile}
+        case "SET-USER-PROFILE": {
+            return {...state, profile: action.profile}
         }
         case "SET-USER-STATUS":
-            return {...state,status:action.status}
-
-
-
+            return {...state, status: action.status}
         default:
             return state
     }

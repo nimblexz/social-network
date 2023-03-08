@@ -1,4 +1,5 @@
 import {getAuthUserData} from "./auth-reducer";
+import {Dispatch} from "redux";
 
 type appType = {
     initialized: boolean
@@ -13,10 +14,9 @@ export const initializedSuccess = () => {
         type: 'SET-INITIALIZED'
     } as const
 }
-export const initializeApp = () => (dispatch: any) => {
-    dispatch(getAuthUserData()).then(() => {
-        dispatch(initializedSuccess())
-    })
+export const initializeApp = () => async (dispatch: Dispatch<any>) => {
+    await dispatch(getAuthUserData())
+    dispatch(initializedSuccess())
 }
 export const appReducer = (state: appType = initialState, action: ActionType): appType => {
     switch (action.type) {

@@ -1,12 +1,11 @@
 import s from "./Dialogs.module.css"
 import {Message} from "./Message/Message";
 import {DialogItem} from "./DialogItem/DialogItem";
-import {DialogType} from "../../redux/store";
 import React from "react";
 import {Field, reduxForm} from "redux-form";
 import {Textarea} from "../common/FormControls/FormControls";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
-
+import {DialogType} from "./DialogsContainer";
 
 export type MessageType = {
     id: number
